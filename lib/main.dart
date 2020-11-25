@@ -20,13 +20,39 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepOrange,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(text: "Following".toUpperCase()),
+                Tab(text: "You".toUpperCase()),
+                Tab(text: "Clubs".toUpperCase()),
+              ],
+            ),
+            title: Text('Feed'),
+            centerTitle: false,
+            actions: [
+              Image(image: AssetImage("icons/ic_account_supervisor_outline_white_24dp.png")),
+              Image(image: AssetImage("icons/ic_bell_outline_white_24dp.png")),
+            ],
+          ),
+          body: TabBarView(
+            children: [
+              Icon(Icons.directions_car),
+              Icon(Icons.directions_transit),
+              Icon(Icons.directions_bike),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -45,6 +45,11 @@ class MyApp extends StatelessWidget {
               Image(image: AssetImage("icons/ic_bell_outline_white_24dp.png")),
             ],
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: null,
+            child: Icon(Icons.add),
+            backgroundColor: Colors.deepOrange,
+          ),
           body: TabBarView(
             children: [
               Container(

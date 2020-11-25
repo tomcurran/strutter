@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 void main() {
   runApp(MyApp());
@@ -46,7 +47,81 @@ class MyApp extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              Icon(Icons.directions_car),
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                color:  Color.fromARGB(0, 237, 237, 237),
+                child: Wrap(
+                  children: [
+                    Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                child: new Container(
+                                  width: 48,
+                                  height: 48,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: AssetImage("images/avatar_iainsmith.jpg")
+                                    )
+                                  )),
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Padding(
+                                          padding: EdgeInsets.fromLTRB(0, 4, 0, 2),
+                                          child: Text(
+                                            "Iain Smith",
+                                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                          )),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Padding(
+                                          padding: EdgeInsets.fromLTRB(16, 2, 0, 4),
+                                          child: Transform(
+                                            alignment: Alignment.center,
+                                            transform: Matrix4.rotationY(math.pi),
+                                            child: Image(image: AssetImage("icons/ic_shoe_sneaker_black_24dp.png")),
+                                          ),
+                                      ),
+                                      Padding(
+                                          padding: EdgeInsets.fromLTRB(4, 2, 0, 4),
+                                          child: Text(
+                                            "Today at 12:41 PM",
+                                            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w300),
+                                          )
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [Padding(
+                              padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                              child: Text("Lunch Run",
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                              )
+                            ),
+                            ],
+                          )
+                        ],
+                      )
+                    ),
+                  ],
+                )
+              ),
               Icon(Icons.directions_transit),
               Icon(Icons.directions_bike),
             ],

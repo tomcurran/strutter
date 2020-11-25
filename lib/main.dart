@@ -50,6 +50,24 @@ class MyApp extends StatelessWidget {
             child: Icon(Icons.add),
             backgroundColor: Colors.deepOrange,
           ),
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            currentIndex: 0, // this will be set when a new tab is tapped
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text('Feed'),
+              ),
+              BottomNavigationBarItem(
+                icon: Image(image: AssetImage("icons/ic_compass_grey600_24dp.png")),
+                title: Text('Explore'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                title: Text('Profile'),
+              )
+            ],
+          ),
           body: TabBarView(
             children: [
               Container(

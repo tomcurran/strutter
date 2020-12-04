@@ -96,11 +96,12 @@ class MyApp extends StatelessWidget {
                                   )),
                               ),
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     children: [
                                       Padding(
-                                          padding: EdgeInsets.fromLTRB(0, 4, 0, 2),
+                                          padding: EdgeInsets.fromLTRB(16, 4, 0, 2),
                                           child: Text(
                                             "Iain Smith",
                                             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),

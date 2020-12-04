@@ -56,15 +56,15 @@ class MyApp extends StatelessWidget {
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
-                title: Text('Feed'),
+                label: 'Feed',
               ),
               BottomNavigationBarItem(
                 icon: Image(image: AssetImage("icons/ic_compass_grey600_24dp.png")),
-                title: Text('Explore'),
+                label: 'Explore',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                title: Text('Profile'),
+                label: 'Profile',
               )
             ],
           ),

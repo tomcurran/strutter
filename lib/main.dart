@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 
 void main() {
@@ -77,23 +78,36 @@ class MyApp extends StatelessWidget {
                   children: [
                     Container(
                       color: Colors.white,
-                      padding: EdgeInsets.all(16),
+                      padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
                       child: Column(
                         children: [
                           Row(
                             children: [
-                              Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                child: new Container(
-                                  width: 48,
-                                  height: 48,
-                                  decoration: new BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: new DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage("images/avatar_iainsmith.jpg")
-                                    )
-                                  )),
+                              new Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
+                                    child: new Container(
+                                      width: 48,
+                                      height: 48,
+                                      decoration: new BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: new DecorationImage(
+                                          fit: BoxFit.fill,
+                                          image: AssetImage("images/avatar_iainsmith.jpg")
+                                        )
+                                      )),
+                                  ),
+                                  new Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    child: SvgPicture.asset(
+                                      "icons/badges_multicolor_summit_small.svg",
+                                      height: 20,
+                                      width: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,

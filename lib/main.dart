@@ -149,13 +149,72 @@ class MyApp extends StatelessWidget {
                             children: [Padding(
                               padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
                               child: Text("Lunch Run",
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               )
                             ),
                             ],
-                          )
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Distance",
+                                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                                    ),
+                                    Padding(padding: EdgeInsets.only(top: 4)),
+                                    Text(
+                                      "5.63 km",
+                                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Padding(padding: EdgeInsets.only(left: 16, right: 16)),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Pace",
+                                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                                    ),
+                                    Padding(padding: EdgeInsets.only(top: 4)),
+                                    Text(
+                                      "4.53 /km",
+                                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Padding(padding: EdgeInsets.only(left: 16, right: 16)),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Time",
+                                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),
+                                    ),
+                                    Padding(padding: EdgeInsets.only(top: 4)),
+                                    Text(
+                                      "27m 33s",
+                                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
-                      )
+                      ),
                     ),
                   ],
                 )

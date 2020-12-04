@@ -83,22 +83,22 @@ class MyApp extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              new Stack(
+                              Stack(
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.fromLTRB(0, 6, 6, 6),
-                                    child: new Container(
+                                    child: Container(
                                       width: 48,
                                       height: 48,
-                                      decoration: new BoxDecoration(
+                                      decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        image: new DecorationImage(
+                                        image: DecorationImage(
                                           fit: BoxFit.fill,
                                           image: AssetImage("images/avatar_iainsmith.jpg")
                                         )
                                       )),
                                   ),
-                                  new Positioned(
+                                  Positioned(
                                     top: 0,
                                     right: 0,
                                     child: SvgPicture.asset(

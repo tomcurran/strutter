@@ -19,11 +19,11 @@ class LatLngStream {
   }
 
   LatLngStream.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
-    originalSize = json['original_size'];
-    resolution = json['resolution'];
-    seriesType = json['series_type'];
-    data = (json['data'] == null) ? null : List.listFromJson(json['data']);
+    // if (json == null) return;
+    // originalSize = json['original_size'];
+    // resolution = json['resolution'];
+    // seriesType = json['series_type'];
+    // data = (json['data'] == null) ? null : List.listFromJson(json['data']);
   }
 
   Map<String, dynamic> toJson() {

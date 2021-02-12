@@ -11,10 +11,10 @@ class LatLngStreamAllOf {
   }
 
   LatLngStreamAllOf.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
-    data = (json['data'] == null) ?
-      null :
-      List.listFromJson(json['data']);
+    // if (json == null) return;
+    // data = (json['data'] == null) ?
+    //   null :
+    //   List.listFromJson(json['data']);
   }
 
   Map<String, dynamic> toJson() {

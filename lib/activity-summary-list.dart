@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:strava_flutter/Models/activity.dart';
 import 'package:strava_flutter/strava.dart';
 import 'package:intl/intl.dart';
 
 import './activity-summary-item.dart';
 import './activity-summary-model.dart';
 import './secret.dart';
+import './api/api.dart';
 
 class ActivitySummaryList extends StatefulWidget {
   List<ActivitySummaryModel> _activitySummaries = [
@@ -48,37 +48,52 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
         await strava.oauth(clientId, 'activity:read_all', secret, prompt);
 
     if (isAuthOk) {
+      var storedToken = await strava.getStoredToken();
+
+      defaultApiClient.getAuthentication<OAuth>('strava_oauth').accessToken =
+          storedToken.accessToken;
+
+      var activitiesApi = ActivitiesApi();
       int after =
           (DateTime.now().subtract(Duration(days: 14)).millisecondsSinceEpoch /
                   1000)
               .round();
       int before = (DateTime.now().millisecondsSinceEpoch / 1000).round();
-      List<SummaryActivity> _summaryActivities =
-          await strava.getLoggedInAthleteActivities(before, after);
-      if (_summaryActivities == null || _summaryActivities.isEmpty) {
-        print('Error in getLoggedInAthleteActivities');
-      } else {
-        print('getLoggedInAthleteActivities ');
-        // _summaryActivities.forEach((activity) =>
-        //     print('${activity.name}   ${activity.startDateLocal}'));
-        List<ActivitySummaryModel> activitySummaries = _summaryActivities
-            .where((activity) => activity.type == ActivityType.Run)
-            .map((activity) => ActivitySummaryModel(
-                  avatar: "images/avatar_iainsmith.jpg",
-                  name: "??? ??????",
-                  date: DateFormat("dd MMMM y 'at' k:m")
-                      .format(activity.startDateLocal),
-                  title: activity.name,
-                  distance:
-                      "${(activity.distance / 1000).toStringAsFixed(2)} km",
-                  pace: "?.?? /km",
-                  time: "??m ??s",
-                ))
-            .toList();
-        setState(() {
-          widget._activitySummaries = activitySummaries;
-        });
-      }
+
+      var page = 0;
+      const stravaPageSizeMax = 200;
+      List<SummaryActivity> summaryActivities = List();
+      List<SummaryActivity> summaryActivitiesPage;
+      do {
+        page++;
+        summaryActivitiesPage =
+            await activitiesApi.getLoggedInAthleteActivities(
+          before: before,
+          after: after,
+          page: page,
+          perPage: stravaPageSizeMax,
+        );
+        summaryActivities.addAll(summaryActivitiesPage);
+      } while (summaryActivitiesPage.isNotEmpty);
+
+      var activitySummaries = summaryActivities
+          .where((activity) => activity.type == ActivityType.run_)
+          .map((activity) => ActivitySummaryModel(
+                avatar: "images/avatar_iainsmith.jpg",
+                name: "??? ??????",
+                date: DateFormat("dd MMMM y 'at' k:m")
+                    .format(activity.startDateLocal),
+                title: activity.name,
+                distance: "${(activity.distance / 1000).toStringAsFixed(2)} km",
+                pace:
+                    "${((1000 / activity.averageSpeed) / 60).truncate()}.${((1000 / activity.averageSpeed).truncate() % 60).toString().padLeft(2, '0')} /km",
+                time: "??m ??s",
+              ))
+          .toList();
+
+      setState(() {
+        widget._activitySummaries = activitySummaries;
+      });
     }
   }
 

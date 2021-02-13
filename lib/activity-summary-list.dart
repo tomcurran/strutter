@@ -1,33 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:strava_flutter/strava.dart';
-import 'package:intl/intl.dart';
 
 import './activity-summary-item.dart';
-import './activity-summary-model.dart';
 import './secret.dart';
 import './api/api.dart';
 
 class ActivitySummaryList extends StatefulWidget {
-  List<ActivitySummaryModel> _activitySummaries = [
-    // ActivitySummaryModel(
-    //   avatar: "images/avatar_iainsmith.jpg",
-    //   name: "Iain Smith",
-    //   date: "Today at 12:41 PM",
-    //   title: "Lunch Run",
-    //   distance: "5.63 km",
-    //   pace: "4.53 /km",
-    //   time: "27m 33s",
-    // ),
-    // ActivitySummaryModel(
-    //   avatar: "images/avatar_iainsmith.jpg",
-    //   name: "Iain Smith 3",
-    //   date: "Today at 12:41 PM",
-    //   title: "Lunch Run",
-    //   distance: "5.63 km",
-    //   pace: "4.53 /km",
-    //   time: "27m 33s",
-    // ),
-  ];
+  List<SummaryActivity> _summaryActivities = [];
 
   ActivitySummaryList({
     Key key,
@@ -76,23 +55,10 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
         summaryActivities.addAll(summaryActivitiesPage);
       } while (summaryActivitiesPage.isNotEmpty);
 
-      var activitySummaries = summaryActivities
-          .where((activity) => activity.type == ActivityType.run_)
-          .map((activity) => ActivitySummaryModel(
-                avatar: "images/avatar_iainsmith.jpg",
-                name: "??? ??????",
-                date: DateFormat("dd MMMM y 'at' k:m")
-                    .format(activity.startDateLocal),
-                title: activity.name,
-                distance: "${(activity.distance / 1000).toStringAsFixed(2)} km",
-                pace:
-                    "${((1000 / activity.averageSpeed) / 60).truncate()}.${((1000 / activity.averageSpeed).truncate() % 60).toString().padLeft(2, '0')} /km",
-                time: "??m ??s",
-              ))
-          .toList();
-
       setState(() {
-        widget._activitySummaries = activitySummaries;
+        widget._summaryActivities = summaryActivities
+            .where((activity) => activity.type == ActivityType.run_)
+            .toList();
       });
     }
   }
@@ -110,12 +76,12 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
       color: Color.fromARGB(0, 237, 237, 237),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          final activitySummary = widget._activitySummaries[index];
+          final summaryActivity = widget._summaryActivities[index];
           return ActivitySummaryItem(
-            activitySummary: activitySummary,
+            summaryActivity: summaryActivity,
           );
         },
-        itemCount: widget._activitySummaries.length,
+        itemCount: widget._summaryActivities.length,
       ),
     );
   }

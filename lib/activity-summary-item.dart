@@ -1,14 +1,16 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'activity-summary-model.dart';
+import 'package:intl/intl.dart';
+
+import './api/api.dart';
 
 class ActivitySummaryItem extends StatelessWidget {
-  final ActivitySummaryModel activitySummary;
+  final SummaryActivity summaryActivity;
 
   const ActivitySummaryItem({
     Key key,
-    this.activitySummary,
+    this.summaryActivity,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,8 @@ class ActivitySummaryItem extends StatelessWidget {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 fit: BoxFit.fill,
-                                image: AssetImage(activitySummary.avatar)))),
+                                image: AssetImage(
+                                    "images/avatar_iainsmith.jpg")))),
                   ),
                   Positioned(
                     top: 0,
@@ -52,7 +55,7 @@ class ActivitySummaryItem extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.fromLTRB(16, 4, 0, 2),
                           child: Text(
-                            activitySummary.name,
+                            "??? ??????",
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           )),
@@ -73,7 +76,8 @@ class ActivitySummaryItem extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.fromLTRB(4, 2, 0, 4),
                           child: Text(
-                            activitySummary.date,
+                            DateFormat("dd MMMM y 'at' k:m")
+                                .format(summaryActivity.startDateLocal),
                             style: TextStyle(
                                 fontSize: 13, fontWeight: FontWeight.w300),
                           )),
@@ -88,7 +92,7 @@ class ActivitySummaryItem extends StatelessWidget {
               Padding(
                   padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
                   child: Text(
-                    activitySummary.title,
+                    summaryActivity.name,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   )),
             ],
@@ -107,7 +111,7 @@ class ActivitySummaryItem extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.only(top: 4)),
                     Text(
-                      activitySummary.distance,
+                      "${(summaryActivity.distance / 1000).toStringAsFixed(2)} km",
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
                     ),
@@ -128,7 +132,7 @@ class ActivitySummaryItem extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.only(top: 4)),
                     Text(
-                      activitySummary.pace,
+                      "${((1000 / summaryActivity.averageSpeed) / 60).truncate()}.${((1000 / summaryActivity.averageSpeed).truncate() % 60).toString().padLeft(2, '0')} /km",
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
                     ),
@@ -149,7 +153,7 @@ class ActivitySummaryItem extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.only(top: 4)),
                     Text(
-                      activitySummary.time,
+                      "??m ??s",
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
                     ),

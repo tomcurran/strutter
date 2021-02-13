@@ -7,6 +7,7 @@ import './api/api.dart';
 
 class ActivitySummaryList extends StatefulWidget {
   List<SummaryActivity> _summaryActivities = [];
+  DetailedAthlete _detailedAthlete;
 
   ActivitySummaryList({
     Key key,
@@ -32,6 +33,9 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
       defaultApiClient.getAuthentication<OAuth>('strava_oauth').accessToken =
           storedToken.accessToken;
 
+      var athletesApi = AthletesApi();
+      var detailedAthlete = await athletesApi.getLoggedInAthlete();
+
       var activitiesApi = ActivitiesApi();
       int after =
           (DateTime.now().subtract(Duration(days: 14)).millisecondsSinceEpoch /
@@ -56,6 +60,7 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
       } while (summaryActivitiesPage.isNotEmpty);
 
       setState(() {
+        widget._detailedAthlete = detailedAthlete;
         widget._summaryActivities = summaryActivities
             .where((activity) => activity.type == ActivityType.run_)
             .toList();
@@ -76,9 +81,9 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
       color: Color.fromARGB(0, 237, 237, 237),
       child: ListView.builder(
         itemBuilder: (context, index) {
-          final summaryActivity = widget._summaryActivities[index];
           return ActivitySummaryItem(
-            summaryActivity: summaryActivity,
+            detailedAthlete: widget._detailedAthlete,
+            summaryActivity: widget._summaryActivities[index],
           );
         },
         itemCount: widget._summaryActivities.length,

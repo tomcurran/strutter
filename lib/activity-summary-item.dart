@@ -7,10 +7,12 @@ import './api/api.dart';
 
 class ActivitySummaryItem extends StatelessWidget {
   final SummaryActivity summaryActivity;
+  final DetailedAthlete detailedAthlete;
 
   const ActivitySummaryItem({
     Key key,
     this.summaryActivity,
+    this.detailedAthlete,
   }) : super(key: key);
 
   @override
@@ -33,8 +35,8 @@ class ActivitySummaryItem extends StatelessWidget {
                             shape: BoxShape.circle,
                             image: DecorationImage(
                                 fit: BoxFit.fill,
-                                image: AssetImage(
-                                    "images/avatar_iainsmith.jpg")))),
+                                image: NetworkImage(
+                                    detailedAthlete.profileMedium)))),
                   ),
                   Positioned(
                     top: 0,
@@ -55,7 +57,7 @@ class ActivitySummaryItem extends StatelessWidget {
                       Padding(
                           padding: EdgeInsets.fromLTRB(16, 4, 0, 2),
                           child: Text(
-                            "??? ??????",
+                            "${detailedAthlete.firstname} ${detailedAthlete.lastname}",
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           )),

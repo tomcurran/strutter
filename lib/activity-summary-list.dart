@@ -81,6 +81,7 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
         ),
         itemBuilder: (context, index) {
           return ActivitySummaryItem(
+            key: new Key(widget._summaryActivities[index].id.toString()),
             detailedAthlete: widget._detailedAthlete,
             summaryActivity: widget._summaryActivities[index],
           );

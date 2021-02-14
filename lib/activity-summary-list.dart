@@ -73,9 +73,12 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
       color: Color.fromARGB(0, 237, 237, 237),
-      child: ListView.builder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.transparent,
+          height: 16,
+        ),
         itemBuilder: (context, index) {
           return ActivitySummaryItem(
             detailedAthlete: widget._detailedAthlete,

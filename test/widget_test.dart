@@ -13,6 +13,6 @@ import 'package:strutter/main.dart';
 void main() {
   testWidgets('Placeholder test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(StrutterApp());
   });
 }

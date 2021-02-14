@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:strava_flutter/strava.dart';
 import './activity-summary-list.dart';
+import './secret.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
     Key key,
   }) : super(key: key);
+
+  void _logout() async {
+    await Strava(true, secret).deAuthorize();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: null,
+          onPressed: () => _logout(),
           child: Icon(Icons.add),
           backgroundColor: Colors.deepOrange,
         ),

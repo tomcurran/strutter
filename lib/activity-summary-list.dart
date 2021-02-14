@@ -18,15 +18,11 @@ class ActivitySummaryList extends StatefulWidget {
 }
 
 class _ActivitySummaryListState extends State<ActivitySummaryList> {
+  final strava = Strava(true, secret);
+
   void _loadData() async {
-    bool isAuthOk = false;
-
-    final strava = Strava(true, secret);
-    final prompt = 'auto';
-
-    isAuthOk =
-        await strava.oauth(clientId, 'activity:read_all', secret, prompt);
-
+    bool isAuthOk =
+        await strava.oauth(clientId, 'activity:read_all', secret, 'auto');
     if (isAuthOk) {
       var storedToken = await strava.getStoredToken();
 

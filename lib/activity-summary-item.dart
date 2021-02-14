@@ -155,7 +155,10 @@ class ActivitySummaryItem extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.only(top: 4)),
                     Text(
-                      "??m ??s",
+                      (Duration(seconds: summaryActivity.movingTime).inHours >=
+                              1)
+                          ? "${Duration(seconds: summaryActivity.movingTime).inHours}h ${Duration(seconds: summaryActivity.movingTime).inMinutes.remainder(60)}m"
+                          : "${Duration(seconds: summaryActivity.movingTime).inMinutes.remainder(60)}m ${Duration(seconds: summaryActivity.movingTime).inSeconds.remainder(60)}s",
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.w300),
                     ),

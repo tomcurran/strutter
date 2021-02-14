@@ -6,9 +6,6 @@ import './secret.dart';
 import './api/api.dart';
 
 class ActivitySummaryList extends StatefulWidget {
-  List<SummaryActivity> _summaryActivities = [];
-  DetailedAthlete _detailedAthlete;
-
   ActivitySummaryList({
     Key key,
   }) : super(key: key);
@@ -19,6 +16,8 @@ class ActivitySummaryList extends StatefulWidget {
 
 class _ActivitySummaryListState extends State<ActivitySummaryList> {
   final strava = Strava(true, secret);
+  List<SummaryActivity> _summaryActivities = [];
+  DetailedAthlete _detailedAthlete;
 
   void _loadData() async {
     bool isAuthOk =
@@ -56,8 +55,8 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
       } while (summaryActivitiesPage.isNotEmpty);
 
       setState(() {
-        widget._detailedAthlete = detailedAthlete;
-        widget._summaryActivities = summaryActivities
+        _detailedAthlete = detailedAthlete;
+        _summaryActivities = summaryActivities
             .where((activity) => activity.type == ActivityType.run_)
             .toList();
       });
@@ -81,12 +80,12 @@ class _ActivitySummaryListState extends State<ActivitySummaryList> {
         ),
         itemBuilder: (context, index) {
           return ActivitySummaryItem(
-            key: new Key(widget._summaryActivities[index].id.toString()),
-            detailedAthlete: widget._detailedAthlete,
-            summaryActivity: widget._summaryActivities[index],
+            key: new Key(_summaryActivities[index].id.toString()),
+            detailedAthlete: _detailedAthlete,
+            summaryActivity: _summaryActivities[index],
           );
         },
-        itemCount: widget._summaryActivities.length,
+        itemCount: _summaryActivities.length,
       ),
     );
   }

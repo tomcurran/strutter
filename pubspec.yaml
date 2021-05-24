@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  flutter_svg: ^0.22.0
+  flutter_svg: ^0.19.1
   strava_flutter: ^1.2.2+62
   intl: ^0.16.1
 
